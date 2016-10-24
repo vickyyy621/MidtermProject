@@ -146,7 +146,7 @@ ggplot(hkd, aes(x = 1 , y = Date)) + geom_boxplot() + xlab("Currency Rate") + yl
 Here, we use function ggplot to perform a scatterplot with x=Date and y=HKD. 
 
 ```{r echo=FALSE}
-HKDplot1 <- ggplot(hkd, aes(hkd$Date, HKD)) + geom_point(na.rm=TRUE, color="blue", size=1) + scale_x_date(date_labels = "%b-%y") + ggtitle("HKD per USD\n 2000-2015") + xlab("Date") + ylab("Currency Rate")    # time series plot for HKD rate
+HKDplot1 <- ggplot(hkd, aes(hkd$Date, hkd$HKD)) + geom_point(na.rm=TRUE, color="blue", size=1) + scale_x_date(date_labels = "%b-%y") + ggtitle("HKD per USD\n 2000-2015") + xlab("Date") + ylab("Currency Rate")    # time series plot for HKD rate
 HKDplot1 <- HKDplot1 + theme_stata() + stat_smooth(color = "red")     #add a theme and a trend
 HKDplot1
 ```
