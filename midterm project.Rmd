@@ -33,34 +33,38 @@ eur <- cbind(i=i, eur)     # merge to a new data set
 head(eur)
 ```
 
+## Time series plot of EUR
+
+Firstly, convert data from "eur" data set to time series data, and then plot. We can see the trend of daily data from 2000 to 2015 is very unstable. The currency rate starts increasing from 2001 to 2013, and then rapidly fallls. From 2004 to the end of 2015, the currency rate cycles the rapidly up-down pattern. 
+
 ```{r include=FALSE}
 library(tseries)     # for time series analysis
 library(dplyr)     # for manipulating data.frames
 ```
-
-## Time series plot of EUR
-
-Firstly, convert data from "eur" data set to time series data, and then plot. We can see the trend of daily data from 2000 to 2015 is very unstable. The currency rate starts increasing from 2001 to 2013, and then rapidly fallls. From 2004 to the end of 2015, the currency rate cycles the rapidly up-down pattern. 
 
 ```{r ts_eur, echo=FALSE}
 ts_eur <-  ts(eur$EUR, start = 2000, frequency = 365)     # create a time series object
 plot.ts(ts_eur)     # time series plot
 ```
 
-```{r include=FALSE}
-library(zoo)     #for handling regular and irregular time series
-library(forecast)     #for forecasting functions for time series
-```
 
 ## Forecast the currency rate of EUR
 
 After plotting the time series plot, we can use time series data to forecast the currency rate for next ten years. From the forecast plot of EUR, we can see that the trend is relatively smooth, and the currency rate would have a little decrease in the future.
+
+```{r include=FALSE}
+library(zoo)     #for handling regular and irregular time series
+library(forecast)     #for forecasting functions for time series
+```
 
 ```{r eur_fc, echo=FALSE}
 eur_tbats = tbats(ts_eur)     # detect daily patterns in time series data
 eur_fc = forecast(eur_tbats, h = 120)     # forecast EUR rate for next 120 months=10 years
 plot(eur_fc)
 ```
+
+
+## Apply ggplot2 to plot
 
 ```{r include=FALSE}
 library(date)     # for handling dates
@@ -70,15 +74,11 @@ library(ggplot2)     # for creating graphs
 library(ggthemes)     #for changing themes
 ```
 
-## Boxplot of EUR
-
 We use boxplot to check if there is an outlier in the data set. As we see from the this plot, there is no outlier.
 
 ```{r echo=FALSE}
 ggplot(eur, aes(x = 1 , y = Date)) + geom_boxplot() + xlab("Currency Rate") + ylab("Date")    # check outliers
 ```
-
-## Apply ggplot2 to plot
 
 Here, we use function ggplot to perform a scatterplot with x=Date and y=HKD. 
 
