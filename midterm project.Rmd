@@ -239,7 +239,9 @@ ggplot(hkd, aes(Tj, hkd$HKD)) + geom_line() + theme_economist() +  ggtitle("Line
 
 Last but not least, we need to reorganize data. We merge new data to the original data set and update the final data.
 
-```{r tidy data}
+```{r echo=FALSE, results='asis'}
 rate <- cbind(rate, Ti, Tj)
+library(knitr)
+kcable(rate[1:4021, ], caption = "A knitr table.")
 ```
 
