@@ -12,6 +12,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Read a data file and filter data
 
+I downloaded the data set from Federal Reserve website. The data set is about currency rate(Euro and HK Dollar) per USD from 2000.01.01 to 2016.01.01.
+
 ```{r}
 rate0 <- read.csv(file.choose())
 attach(rate0)
